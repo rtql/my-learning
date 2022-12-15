@@ -16,8 +16,13 @@ const server = http.createServer((req, res) => {
   */
 
   res.setHeader('Content-Type', 'text/plain; charset=utf-8')
+  const text = url.searchParams.get('message')
+  if (!text) {
+    res.statusCode = 400
+    res.end("Передайте строку в параметре message GET-запроса")
+  }
   res.statusCode = 200
-  res.end('Привет!')
+  res.end(text)
 });
 
 module.exports = { server }
