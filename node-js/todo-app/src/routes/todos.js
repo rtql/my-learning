@@ -65,9 +65,15 @@ router.use(apiAuth)
 // Получение списка задач. Фильтры задаются параметрами GET-запроса
 router.get('/', totalMiddleware, async (ctx, next) => {
   const { contentType } = ctx.query
+  const parameters = Object // не смог развернуть объект внутри filter
+  .entries(ctx.query)
+  .reduce((result, [key, value]) => {
+     result = { [key]: parseFilterValue(value) }
+     return result
+  }, {})
   const filter = {
     /*
-      TODO [Урок 4.1]: Заполните значение переменной filter.
+      DONE! [Урок 4.1]: Заполните значение переменной filter.
 
       Значение переменной filter используется в функции #getTodos в файле 'src/model/todo.js'.
       Переменная filter должна содержать параметры запроса к базе данных на выборку записей списка дел.
@@ -76,11 +82,12 @@ router.get('/', totalMiddleware, async (ctx, next) => {
       В качестве входных данных используйте объект ctx.query.
       Для преобразования типов данных входных параметров используйте функцию #parseFilterValue
     */
-    completed: parseFilterValue(ctx.query.completed)
+    ...parameters
     /*
       TODO [Урок 5.3]: Добавьте фильтр по email-адреса пользователя при получении записей из БД
     */
   }
+  console.log(filter);
   const cursor = getTodos(filter)
   switch (contentType) {
     case 'todotxt':
@@ -101,6 +108,7 @@ router.get('/:id', async (ctx, next) => {
 
       Прочитайте значение параметра _id из URL-адреса.
     */
+    _id: ctx.params.id
     /*
       TODO [Урок 5.3]: Добавьте фильтр по email-адреса пользователя при получении записей из БД
     */
