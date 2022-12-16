@@ -76,6 +76,7 @@ router.get('/', totalMiddleware, async (ctx, next) => {
       В качестве входных данных используйте объект ctx.query.
       Для преобразования типов данных входных параметров используйте функцию #parseFilterValue
     */
+    completed: parseFilterValue(ctx.query.completed)
     /*
       TODO [Урок 5.3]: Добавьте фильтр по email-адреса пользователя при получении записей из БД
     */

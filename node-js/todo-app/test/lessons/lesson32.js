@@ -7,22 +7,22 @@ const {
   getTodos
 } = require('../../src/model/todo')
 
-describe('Урок 3.2', () => {
-  afterEach(async () => {
-    const collection = await db.getCollection('todos')
-    await collection.deleteMany()
-    await db.close()
-  })
+// describe('Урок 3.2', () => {
+//   afterEach(async () => {
+//     const collection = await db.getCollection('todos')
+//     await collection.deleteMany()
+//     await db.close()
+//   })
 
-  it('Установка подключения к БД', async () => {
-    await db.init()
-  })
+//   it('Установка подключения к БД', async () => {
+//     await db.init()
+//   })
 
-  it('Проверка чтения и записи данных', async () => {
-    await db.init()
+//   it('Проверка чтения и записи данных', async () => {
+//     await db.init()
 
-    const expectedResult = [await helpers.createTodo()]
-    const result = await getTodos().toArray()
-    expect(result).to.deep.equal(expectedResult)
-  })
-})
+//     const expectedResult = [await helpers.createTodo()]
+//     const result = await getTodos().toArray()
+//     expect(result).to.deep.equal(expectedResult)
+//   })
+// })

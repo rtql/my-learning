@@ -90,13 +90,14 @@ function getTodos (query) {
 function getTodo (query) {
   const col = dbConnection.getCollection(COLLECTION)
   /*
-    TODO [Урок 4.1]: Реализуйте логику получения одной записи списка дел из базы данных
+    DONE! [Урок 4.1]: Реализуйте логику получения одной записи списка дел из базы данных
 
     - Используйте функцию col.findOne [http://mongodb.github.io/node-mongodb-native/3.5/api/Collection.html#findOne]:
       await col.findOne(<параметры поиска>)
     - Используйте функцию _mapObjectId(<параметры запроса>), чтобы преобразовать идентификатор записи
       к объекту ObjectID в MongoDB.
   */
+  return col.findOne(_mapObjectId(query))
 }
 
 /**
