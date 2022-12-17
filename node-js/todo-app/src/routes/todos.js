@@ -52,6 +52,9 @@ function parseTodo (requestBody) {
                     или null для незавершенных задач
       }
     */
+    title: requestBody.title,
+    completed: requestBody.completed ? true : false,
+    completedAt: requestBody.completed ? new Date() : null
   }
   return todo
 }
@@ -87,7 +90,7 @@ router.get('/', totalMiddleware, async (ctx, next) => {
       TODO [Урок 5.3]: Добавьте фильтр по email-адреса пользователя при получении записей из БД
     */
   }
-  console.log(filter);
+  
   const cursor = getTodos(filter)
   switch (contentType) {
     case 'todotxt':
@@ -104,7 +107,7 @@ router.get('/', totalMiddleware, async (ctx, next) => {
 router.get('/:id', async (ctx, next) => {
   const result = await getTodo({
     /*
-      TODO [Урок 4.1]: Реализуйте фильтр записей списка дел по идентификатору.
+      DONE! [Урок 4.1]: Реализуйте фильтр записей списка дел по идентификатору.
 
       Прочитайте значение параметра _id из URL-адреса.
     */
